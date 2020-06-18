@@ -5,8 +5,13 @@
  */
 package com.example.opc3.controller;
 
+import com.example.opc3.entities.Usuario;
+import com.example.opc3.repository.UsuarioRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
 /**
  *
@@ -15,6 +20,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class ViewController {
+    
+    @Autowired
+    UsuarioRepository usuarioRepository;
     
     
     @GetMapping("/index")
@@ -30,6 +38,17 @@ public class ViewController {
     @GetMapping("/admin")
     public String admin(){
         return "admin";
+    }
+    
+    @PostMapping("/signup")
+    public String registro(@ModelAttribute(value="usuario") Usuario usuario){
+        usuarioRepository.save(usuario);
+        return "index";
+    }
+    
+    @GetMapping("/registrese")
+    public String registrar(){
+        return "registro";
     }
     
 }
