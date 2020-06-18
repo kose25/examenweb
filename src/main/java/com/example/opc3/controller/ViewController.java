@@ -43,7 +43,7 @@ public class ViewController {
     @PostMapping("/signup")
     public String registro(@ModelAttribute(value="usuario") Usuario usuario){
         usuarioRepository.save(usuario);
-        return "index";
+        return "redirect:/index";
     }
     
     @GetMapping("/registrese")
